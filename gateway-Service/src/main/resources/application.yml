@@ -1,0 +1,68 @@
+server:
+  port: 8090  # Port for Gateway service
+
+spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true  # Allow overriding bean definitions if needed
+
+  application:
+    name: gateway-service  # Name of the gateway service
+
+  cloud:
+    gateway:
+      # Define routes for different services
+      routes:
+        # Route for Auth-Service (handles authentication)
+        - id: auth-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/auth/**  # Matches requests starting with /auth
+
+        # Route for Profile-Service (authentication required)
+        - id: profile-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/profile/**  # Matches requests starting with /profile
+          filters:
+            - StripPrefix=1  # Optionally strip the /leave path to match with the service
+
+        # Route for Payroll-Service (authentication required)
+        - id: payroll-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/payroll/**  # Matches requests starting with /payroll
+
+        # Route for Leave-Service (with authentication and graphiql path)
+        - id: leave-service
+          uri: http://localhost:8084
+          filters:
+            - StripPrefix=1  # Optionally strip the /leave path to match with the service
+          predicates:
+            - Path=/leave/**  # Matches requests starting with /leave
+            - Path=/leave/graphiql  # Matches requests for /leave/graphiql
+
+        # Route for Performance Evaluation Service (authentication required)
+        - id: performance-evaluation-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/performance/**  # Matches requests starting with /performance
+          filters:
+            - StripPrefix=1  # Optionally strip the /leave path to match with the service
+
+  security:
+    oauth2:
+      client:
+        client-id: gestEmployees
+      # Configuration for OAuth2 resource server
+      resourceserver:
+        jwt:
+          # The issuer URI where the OAuth2 token is coming from
+          issuer-uri: http://localhost:8080/realms/GestEmp
+          # The JWK Set URI for verifying the JWT signature
+          jwk-set-uri: http://localhost:8080/realms/GestEmp/protocol/openid-connect/certs
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG  # Enable debug logging for Gateway
+    org.springframework.security: DEBUG  # Enable debug logging for Security (OAuth2, JWT, etc.)

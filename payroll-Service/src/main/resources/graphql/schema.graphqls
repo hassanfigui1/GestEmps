@@ -1,0 +1,33 @@
+    type Salary {
+        id: ID!
+        employeeId: String!
+        payPeriod: String!
+        baseSalary: Float!
+        bonus: Float
+        taxDeductions: Float
+        netSalary: Float
+    }
+
+    type Query {
+        getSalariesForEmployee(employeeId: ID!): [Salary]
+        getSalaryById(salaryId: ID!): Salary
+        getRemainingLeaveDays(employeeId: ID!): Int!
+        getAllSalaries: [Salary]
+    }
+
+    type Mutation {
+        deleteSalary(salaryId: ID!): Boolean
+
+        calculateSalary(
+            employeeId: ID!,
+            baseSalary: Float!,
+            bonus: Float
+        ): Salary
+        updateSalary(
+            salaryId: ID!,
+            baseSalary: Float!,
+            bonus: Float,
+            taxDeductions: Float,
+            netSalary: Float
+        ): Salary
+    }

@@ -1,0 +1,31 @@
+## to login
+
+mutation {
+  login(password: "hassanfig", username: "hassanfig") {
+    token
+    user {
+      createdAt
+      email
+      id
+      lastLogin
+      username
+      roles
+    }
+  }
+}
+
+REGISTER :
+
+mutation {
+  register(
+    username: "test",
+    password: "securepass",
+    email: "jane@example.com",
+    roles: [EMPLOYEE]
+  ) {
+    id
+    username
+    email
+    roles
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Eureka-Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auth-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/leave-mgt-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/payroll-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/performance-evaluation-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/profile-Service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

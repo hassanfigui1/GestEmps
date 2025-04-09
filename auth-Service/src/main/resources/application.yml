@@ -1,0 +1,34 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-Service
+  graphql:
+    path: /graphql
+    graphiql:
+      enabled: true
+  datasource:
+    url: jdbc:h2:file:C:/Users/pc/Desktop/version2/auth;AUTO_SERVER=TRUE
+
+    driverClassName: org.h2.Driver
+    username: hassanfig
+    password: hassanfig
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+# JWT Configuration
+jwt:
+  secret: 79ff167c91aa844c95ef76c68bd023b286e3bae34f47698256ec69aedb27bea7313c9c781032b2ec7e5320cb04924452e4b9cbb0b8c28a16d72cf399f7f39f2b3048f9800634dbfc3a46d2e47ce1bc7a2d4ea39ded023a22216f943f824c96ae600c41ae7b209cc77af3af7b14c17f9e4ad3b8ee51f926bf60fc94e60c650f183ae7058bea494ad90611fb9d8a261828e7b8eb7a519f35a4c930ed669274fdb7e343472d99f1a5deac1858a4a6608331d97b97816dae54d18e3452f1333ee8328b9d481c6b7c7a4ca03e673d01472c79de241eb3881bb7dfc6997391e38b40221738a5e729a822afa8d161a79a9b324d5cca6eec90707f6c7eaec1f96610b73b
+  expiration: 86400000 # 24 hours in milliseconds
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.security: DEBUG

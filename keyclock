@@ -1,0 +1,22 @@
+realm name : microservices
+client name : auth-service
+client-secret : Y8VEgvC0pqvunHccu6ip65VAM9RXZLJs
+  "issuer": "http://localhost:8080/realms/microservices",
+  "token_endpoint": "
+  http://localhost:8080/realms/microservices/protocol/openid-connect/token",
+
+
+
+const token = 'your_jwt_token'; // replace with actual token
+await axios.post(
+  'http://localhost:8083/graphql',
+  {
+    query: mutation,
+    variables: variables,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);

@@ -1,0 +1,156 @@
+# Employee type
+type Employee {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    middleName: String
+    dateOfBirth: String
+    gender: Gender
+    email: String!
+    personalEmail: String
+    phoneNumber: String
+    mobileNumber: String
+    homeAddress: Address
+    hireDate: String
+    terminationDate: String
+    department: Department!
+    jobTitle: String
+    employmentType: EmploymentType
+    salary: Float
+    managerId: String
+    skills: [Skill!]
+    certifications: [Certification!]
+    educationBackground: [EducationBackground!]
+    isActive: Boolean
+    workEmail: String
+}
+
+# Enum types
+enum Department {
+    HR
+    IT
+    FINANCE
+    MARKETING
+    SALES
+    OPERATIONS
+    CUSTOMER_SERVICE
+    RESEARCH_AND_DEVELOPMENT
+}
+
+enum EmploymentType {
+    FULL_TIME
+    PART_TIME
+    CONTRACT
+    TEMPORARY
+    INTERN
+    CONSULTANT
+}
+
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+    PREFER_NOT_TO_SAY
+}
+
+enum ProficiencyLevel {
+    BEGINNER
+    INTERMEDIATE
+    ADVANCED
+    EXPERT
+}
+
+# Nested types
+type Address {
+    streetAddress: String
+    city: String
+    stateProvince: String
+    postalCode: String
+    country: String
+}
+
+type Skill {
+    name: String!
+    proficiencyLevel: ProficiencyLevel
+}
+
+type Certification {
+    name: String!
+    issuingOrganization: String
+    issueDate: String
+    expirationDate: String
+}
+
+type EducationBackground {
+    degree: String!
+    major: String
+    institution: String!
+    graduationDate: String
+}
+
+# Query type
+type Query {
+    getAllEmployees: [Employee!]!
+    searchEmployees(term: String!): [Employee!]!
+    getEmployeeById(id: ID!): Employee
+}
+
+# Mutation type
+type Mutation {
+    createEmployee(employee: EmployeeInput!): Employee!
+    updateEmployee(id: ID!, employee: EmployeeInput!): Employee!
+    deleteEmployee(id: ID!): Boolean!
+}
+
+# Input types for creating and updating employees
+input EmployeeInput {
+    firstName: String!
+    lastName: String!
+    middleName: String
+    dateOfBirth: String
+    gender: Gender
+    email: String!
+    personalEmail: String
+    phoneNumber: String
+    mobileNumber: String
+    homeAddress: AddressInput
+    hireDate: String
+    terminationDate: String
+    department: Department!
+    jobTitle: String
+    employmentType: EmploymentType
+    salary: Float
+    managerId: String
+    skills: [SkillInput!]
+    certifications: [CertificationInput!]
+    educationBackground: [EducationBackgroundInput!]
+    isActive: Boolean
+    workEmail: String
+}
+
+input AddressInput {
+    streetAddress: String
+    city: String
+    stateProvince: String
+    postalCode: String
+    country: String
+}
+
+input SkillInput {
+    name: String!
+    proficiencyLevel: ProficiencyLevel
+}
+
+input CertificationInput {
+    name: String!
+    issuingOrganization: String
+    issueDate: String
+    expirationDate: String
+}
+
+input EducationBackgroundInput {
+    degree: String!
+    major: String
+    institution: String!
+    graduationDate: String
+}

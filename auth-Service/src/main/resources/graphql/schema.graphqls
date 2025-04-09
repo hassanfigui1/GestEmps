@@ -1,0 +1,67 @@
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    roles: [UserRole!]!
+    createdAt: String
+    lastLogin: String
+    updatedAt:String!
+}
+
+type AuthPayload {
+    token: String!
+    user: User!
+}
+
+type UserProfile {
+    id: ID!
+    username: String!
+    email: String!
+    roles: [UserRole!]!
+    createdAt: String
+    updatedAt: String!
+}
+
+enum UserRole {
+    ADMIN
+    MANAGER
+    EMPLOYEE
+    HR_SPECIALIST
+}
+
+type Query {
+    getCurrentUser: UserProfile
+    getAllUsers: [UserProfile]
+    getUserByUsername(username: String!): UserProfile
+}
+
+type Mutation {
+    login(
+        username: String!,
+        password: String!
+    ): AuthPayload!
+
+    register(
+        username: String!,
+        password: String!,
+        email: String!,
+        roles: [UserRole!]
+    ): User!
+
+    updateUserProfile(
+        username: String!
+        email: String
+        roles: [UserRole!]
+    ): User!
+
+    changePassword(
+        currentPassword: String!
+        newPassword: String!
+    ): Boolean!
+
+    updateUserRoles(
+        username: String!
+        roles: [UserRole!]!
+    ): User!
+}

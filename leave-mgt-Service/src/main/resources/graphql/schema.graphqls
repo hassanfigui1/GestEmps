@@ -1,0 +1,49 @@
+enum LeaveType {
+    ANNUAL
+    SICK
+    PARENTAL
+    UNPAID
+    STUDY
+    PERSONAL
+}
+
+enum LeaveStatus {
+    PENDING
+    APPROVED
+    REJECTED
+    CANCELLED
+}
+
+type LeaveRequest {
+    id: ID!
+    employeeId: String!
+    leaveType: LeaveType!
+    startDate: String!
+    endDate: String!
+    status: LeaveStatus
+    comments: String
+}
+
+type Query {
+    updateLeaveRequestStatus(leaveRequestId: ID!,status: LeaveStatus!): LeaveRequest
+    searchLeaveRequests(query: String!): [LeaveRequest]
+}
+
+type Mutation {
+    submitLeaveRequest(employeeId: ID!,leaveType: LeaveType!,startDate: String!,endDate: String!,comments: String): LeaveRequest
+    getAllLeaveRequests: [LeaveRequest]
+    getLeaveRequestsByEmployee(employeeId: ID!): [LeaveRequest]
+    getLeaveRequestsByStatus(status: LeaveStatus!): [LeaveRequest]
+    getLeaveRequestById(leaveRequestId: ID!): LeaveRequest
+    deleteLeaveRequest(leaveRequestId: ID!): Boolean # Delete Mutation
+    updateLeaveRequest(
+        leaveRequestId: ID!,
+        employeeId: String!,
+        leaveType: LeaveType!,
+        startDate: String!,
+        endDate: String!,
+        comments: String,
+        status: LeaveStatus
+    ): LeaveRequest
+
+}

@@ -1,0 +1,69 @@
+enum EvaluationPeriod {
+    QUARTERLY
+    SEMI_ANNUAL
+    ANNUAL
+}
+
+enum OverallPerformanceRating {
+    EXCEPTIONAL
+    EXCEEDS_EXPECTATIONS
+    MEETS_EXPECTATIONS
+    NEEDS_IMPROVEMENT
+    UNSATISFACTORY
+}
+
+type PerformanceEvaluation {
+    id: ID!
+    employeeId: String!
+    evaluationDate: String!
+    evaluationPeriod: EvaluationPeriod
+    technicalSkillsScore: Float!
+    communicationScore: Float!
+    teamworkScore: Float!
+    leadershipScore: Float!
+    overallRating: OverallPerformanceRating
+    managerComments: String
+    developmentRecommendations: String
+}
+
+type Query {
+    getPerformanceEvaluationsByEmployee(employeeId: ID!): [PerformanceEvaluation]
+    getPerformanceEvaluationsByRating(rating: OverallPerformanceRating!): [PerformanceEvaluation]
+    getPerformanceEvaluationById(evaluationId: ID!): PerformanceEvaluation
+    getEmployeeDetails(employeeId: ID!): String
+    searchPerformanceEvaluations(
+        employeeId: String,
+        evaluationPeriod: EvaluationPeriod,
+        overallRating: OverallPerformanceRating,
+        startDate: String,
+        endDate: String,
+    ): [PerformanceEvaluation]
+}
+
+type Mutation {
+    getAllPerformanceEvaluations: [PerformanceEvaluation]
+    createPerformanceEvaluation(
+        employeeId: ID!
+        evaluationPeriod: EvaluationPeriod!
+        technicalSkillsScore: Float!
+        communicationScore: Float!
+        teamworkScore: Float!
+        leadershipScore: Float!
+        managerComments: String!
+        developmentRecommendations: String
+        evaluationDate: String!
+    ): PerformanceEvaluation
+    deletePerformanceEvaluation(evaluationId: ID!): Boolean
+    updatePerformanceEvaluation(
+        evaluationId: ID!,
+        employeeId: String,
+        evaluationPeriod: EvaluationPeriod,
+        technicalSkillsScore: Float,
+        communicationScore: Float,
+        teamworkScore: Float,
+        leadershipScore: Float,
+        managerComments: String,
+        developmentRecommendations: String,
+        evaluationDate: String!
+    ): PerformanceEvaluation
+}
